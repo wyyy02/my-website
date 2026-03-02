@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林间集 · 个人作品网站</title>
+    <!-- 柔光暗色系 · 现代极简风格 · 完全自含 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #eaeaea;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* 自定义平滑渐变背景 */
+        .site-wrapper {
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 30%, #2b2b2b 0%, #151515 90%);
+        }
+
+        /* 导航区——毛玻璃 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f0b8a0, #cfa8b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 450;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #f0c0b0;
+            border-bottom-color: #d9a68b;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+        }
+
+        /* 首页欢迎块 */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1rem 5rem;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6b584b, #a58373);
+            box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 3px #3a302b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #edd6c5;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 650;
+            letter-spacing: -1.5px;
+            background: linear-gradient(to right, #fbe3d0, #e2c0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .hero .subhead {
+            font-size: 1.4rem;
+            color: #b0a298;
+            margin-top: 1rem;
+            max-width: 650px;
+            background: rgba(50, 40, 35, 0.4);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* 作品部分 */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 3rem 0 2rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b3530;
+            display: inline-block;
+            color: #f0dfd0;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 4rem;
+        }
+
+        .work-card {
+            background: rgba(40, 35, 32, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid rgba(255, 215, 200, 0.1);
+            transition: all 0.25s;
+            box-shadow: 0 15px 25px -15px #050505;
+        }
+
+        .work-card:hover {
+            background: rgba(60, 50, 45, 0.8);
+            border-color: #b9937f60;
+            transform: translateY(-8px);
+        }
+
+        .work-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            filter: drop-shadow(0 4px 4px #1e1a17);
+        }
+
+        .work-card h3 {
+            font-size: 1.8rem;
+            font-weight: 550;
+            color: #eacebc;
+        }
+
+        .work-card p {
+            color: #bba596;
+            margin: 0.8rem 0 1.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #312c28;
+            color: #cfb8ab;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            border: 1px solid #5f4e44;
+        }
+
+        /* 关于区域 */
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            background: rgba(30, 28, 26, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 58px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid #4d4038;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            font-weight: 550;
+            color: #efd8ca;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text p {
+            color: #cdc0b6;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-badge {
+            background: #2d2722;
+            border-radius: 40px;
+            padding: 0.6rem 1.5rem;
+            color: #eacdbb;
+            display: inline-block;
+            margin: 0.4rem 0.4rem 0 0;
+            border: 1px solid #695b51;
+        }
+
+        .about-stats {
+            flex: 1;
+            background: #201d1b70;
+            border-radius: 40px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            border: 1px solid #685b51;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 2.8rem;
+            font-weight: 650;
+            color: #eccbb8;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: #aa9b90;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* 联系卡片 */
+        .contact-card {
+            background: linear-gradient(145deg, #29231f, #1e1a17);
+            border-radius: 60px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            margin: 4rem 0 2rem;
+            border: 1px solid #ad8f7d40;
+        }
+
+        .contact-card h2 {
+            font-size: 2.8rem;
+            color: #f5d9ca;
+            font-weight: 520;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-email {
+            font-size: 1.5rem;
+            background: #352f2b;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            color: #f0cfbc;
+            margin: 2rem 0 1.5rem;
+            border: 1px solid #8d7f74;
+            word-break: break-all;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            background: #352e29;
+            border-radius: 60px;
+            padding: 0.8rem 2rem;
+            color: #e4c9bb;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid #78685d;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-link:hover {
+            background: #55473f;
+            color: #f5e0d0;
+            border-color: #bdaa9c;
+        }
+
+        /* footer */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 2rem 1rem;
+            color: #7e736b;
+            border-top: 1px solid #35302b;
+            margin-top: 3rem;
+        }
+
+        /* 响应式小修 */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .nav-links {
+                gap: 1.8rem;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="site-wrapper">
+    <!-- 固定导航 -->
+    <nav class="navbar">
+        <div class="logo"><a href="#">林间集.</a></div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#work">作品</a>
+            <a href="#about">关于</a>
+            <a href="#contact">联系</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- 首页锚点 & 英雄区 -->
+        <section id="home">
+            <div class="hero">
+                <div class="avatar" aria-label="头像">✨</div>
+                <h1>用设计 & 代码<br>讲述温暖的故事</h1>
+                <div class="subhead">独立开发者 · 视觉叙事者 · 慢灵感实践</div>
+            </div>
+        </section>
+
+        <!-- 作品精选集 -->
+        <section id="work">
+            <h2 class="section-title">精选作品</h2>
+            <div class="work-grid">
+                <div class="work-card">
+                    <div class="work-icon">🌿</div>
+                    <h3>森林索引</h3>
+                    <p>极简白噪音web App · 日活2w+</p>
+                    <span class="tag">Vue</span>
+                    <span class="tag">Tailwind</span>
+                </div>
+                <div class="work-card">
+                    <div class="work-icon">📷</div>
+                    <h3>暗房叙事</h3>
+                    <p>摄影作品集 · 胶片质感的数字展览</p>
+                    <span class="tag">React</span>
+                    <span class="tag">GSAP</span>
+                </div>
+                <div class="work-card">
+                    <div class="work-icon">🧘</div>
+                    <h3>呼吸形状</h3>
+                    <p>交互式冥想小工具 · 开源项目</p>
+                    <span class="tag">Canvas</span>
+                    <span class="tag">PWA</span>
+                </div>
+                <div class="work-card">
+                    <div class="work-icon">📖</div>
+                    <h3>字在 · 书系</h3>
+                    <p>独立电子出版 · 三册设计</p>
+                    <span class="tag">InDesign</span>
+                    <span class="tag">插画</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于 + 小统计 -->
+        <section id="about">
+            <div class="about-section">
+                <div class="about-text">
+                    <h2>关于我</h2>
+                    <p>嗨，我是林弋 —— 自由设计师、前端开发者。过去八年旅居不同城市，用影像和代码记录日常。我相信细腻的体验藏在小事物的纹理里，这个网站就是我的数字花园。</p>
+                    <p>目前专注于品牌数字橱窗、互动叙事以及让界面拥有“人的温度”。</p>
+                    <div style="margin-top: 2rem;">
+                        <span class="skill-badge">UI/UX 设计</span>
+                        <span class="skill-badge">前端开发</span>
+                        <span class="skill-badge">插画</span>
+                        <span class="skill-badge">摄影</span>
+                        <span class="skill-badge">策展</span>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-num">7+</div>
+                        <div class="stat-label">年设计经验</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">23</div>
+                        <div class="stat-label">个数字项目</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">4</div>
+                        <div class="stat-label">本摄影书</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-label">热忱</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系区块 -->
+        <section id="contact">
+            <div class="contact-card">
+                <h2>一起做些有趣的事</h2>
+                <div style="color:#bbaa9d; max-width:500px; margin:0 auto 1.5rem;">项目合作、随便聊聊，或只是打个招呼</div>
+                <div class="contact-email">hello@linji.cc</div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><span>📘</span> 设计笔记</a>
+                    <a href="#" class="social-link"><span>🐦</span> 瞬间</a>
+                    <a href="#" class="social-link"><span>📷</span> 光影集</a>
+                    <a href="#" class="social-link"><span>💻</span> GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>🌱 林间集 · 由手与代码织成 · 保持缓慢而真诚的创作</p>
+        <p style="margin-top: 1rem; font-size:0.9rem;">© 2026 林弋 · 所有感官保留</p>
+    </footer>
+</div>
+</body>
+</html>
